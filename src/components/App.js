@@ -31,7 +31,7 @@ function App() {
     return /\S+@\S+\.\S+/.test(email);
   }
   const checkhandler = (event) => {
-    if (event.target.name == "name") {
+    if (event.target.name == "email") {
       if (!Validator(event.target.value)) {
         setError({ status: true, massage: "Email is invalid" });
       }
@@ -50,7 +50,7 @@ function App() {
             <input id='fname' name="name" ref={fnameRef} onChange={checkhandler} />
             <br></br>
             <p>Email</p>
-            <input id='lname' name="name" ref={emailRef} onChange={checkhandler} />
+            <input id='lname' name="email" ref={emailRef} onChange={checkhandler} />
             {error.status && <h2 style={{ color: 'red' }}>{error.massage}</h2>}
           </label>
         </fieldset>
