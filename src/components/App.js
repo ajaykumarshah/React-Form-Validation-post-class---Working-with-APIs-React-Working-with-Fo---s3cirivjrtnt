@@ -1,40 +1,67 @@
 
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useReducer } from 'react';
 /**
  * @task :add validation to email, if email is not valid, if not valid email, dont allow to submit
  * @error_message :  "Email is invalid"  if email is wrong. (must be same message) 
  * 
  * 
  */
+// const reducer = (state, action, event) => {
+//   switch (action.type) {
+//     case "FNAME":
+//       return ({ fname: event.target.vallue, lname: state.lname });
+//       break;
+//     case "LNAME":
+//       return ({ fname: state.fname, lname: event.target.vallue });
+//     default: return state;
+//   }
+// }
 
 function App() {
+  const [state, setState] = useState({ fname: "", lname: "" });
 
- /**
-  * code here
-  */
 
-  return(
+  const [error, setError] = useState({ status: false, massage: "Email is invalid" });
+  const fnameRef = useRef();
+  const emailRef = useRef();
+  const handlesubmit = () => {
+
+  }
+  const Validator = (email) => {
+    return /\S+@\S+\.\S+/.test(email);
+  }
+  const checkhandler = (event) => {
+    if (event.target.name == "name") {
+      if (!Validator(event.target.value)) {
+        setError({ status: true, massage: "Email is invalid" });
+      }
+      if (Validator(event.target.value)) {
+        setError({ status: false, massage: "Email is invalid" });
+      }
+    }
+  }
+  return (
     <div className="App">
       <h1>How About Them Apples</h1>
       <form>
         <fieldset>
           <label>
             <p>First Name</p>
-            <input id='fname' name="name"  ref={fnameRef}/>
+            <input id='fname' name="name" ref={fnameRef} onChange={checkhandler} />
             <br></br>
             <p>Email</p>
-            <input id='lname' name="name"   ref={emailRef}/>
-            {error && <h2 style={{color: 'red'}}>{error}</h2>}
+            <input type="email" id='lname' name="name" ref={emailRef} onChange={checkhandler} />
+            {error.status && <h2 style={{ color: 'red' }}>{error.massage}</h2>}
           </label>
         </fieldset>
 
-        <button id='submit' type="submit">Submit</button>
+        <button id='submit' type="submit" disabled={error.status == true} onClick={handlesubmit} >Submit</button>
       </form>
       {
-        data.fname != undefined && (
+        state.fname != undefined && (
           <div>
-          <h1>{data.fname}</h1>
-          <h2>{data.lname}</h2>
+            <h1>{state.fname}</h1>
+            <h2>{state.lname}</h2>
           </div>
         )
       }
