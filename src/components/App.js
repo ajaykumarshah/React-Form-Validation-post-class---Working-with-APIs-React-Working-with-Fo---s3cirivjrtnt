@@ -43,6 +43,10 @@ function App() {
       if (Validator(event.target.value)) {
         setError({ status: false, massage: "Email is invalid" });
       }
+      setState({ fname: state.fname, lname: event.target.value });
+    }
+    else {
+      setState({ fname: event.target.value, lname: state.lname });
     }
   }
   return (
@@ -52,15 +56,15 @@ function App() {
         <fieldset>
           <label>
             <p>First Name</p>
-            <input id='fname' name="name" ref={fnameRef} onChange={checkhandler} />
+            <input id='fname' name="name" ref={fnameRef} value={state.name} onChange={checkhandler} />
             <br></br>
             <p>Email</p>
-            <input id='lname' name="email" ref={emailRef} onChange={checkhandler} />
+            <input id='lname' name="email" ref={emailRef} value={state.email} onChange={checkhandler} />
             {error.status && <h2 style={{ color: 'red' }}>{error.massage}</h2>}
           </label>
         </fieldset>
 
-        <button id='submit' type="submit" disabled={error.status == true} onClick={handlesubmit} >Submit</button>
+        <button id='submit' type="submit" disabled={error.status == true && state.lname.length > 0} onClick={handlesubmit} >Submit</button>
       </form>
       {
         state.fname != undefined && (
