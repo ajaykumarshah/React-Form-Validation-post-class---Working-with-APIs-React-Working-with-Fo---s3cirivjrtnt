@@ -1,5 +1,5 @@
 
-import React, { useState, useRef, useReducer } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 /**
  * @task :add validation to email, if email is not valid, if not valid email, dont allow to submit
  * @error_message :  "Email is invalid"  if email is wrong. (must be same message) 
@@ -27,6 +27,11 @@ function App() {
   const handlesubmit = () => {
 
   }
+
+  useEffect(() => {
+    fnameRef.current.focus();
+  }, [])
+
   const Validator = (email) => {
     return /\S+@\S+\.\S+/.test(email);
   }
