@@ -50,7 +50,7 @@ function App() {
             <input id='fname' name="name" ref={fnameRef} onChange={checkhandler} />
             <br></br>
             <p>Email</p>
-            <input type="email" id='lname' name="name" ref={emailRef} onChange={checkhandler} />
+            <input id='lname' name="name" ref={emailRef} onChange={checkhandler} />
             {error.status && <h2 style={{ color: 'red' }}>{error.massage}</h2>}
           </label>
         </fieldset>
