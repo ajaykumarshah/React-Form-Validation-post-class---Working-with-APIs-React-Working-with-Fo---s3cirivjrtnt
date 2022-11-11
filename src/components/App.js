@@ -25,7 +25,8 @@ function App() {
   const [error, setError] = useState({ status: false, massage: "Email is invalid" });
   const fnameRef = useRef();
   const emailRef = useRef();
-  const handlesubmit = () => {
+  const handlesubmit = (event) => {
+    event.preventDefault();
     setStatus2(true);
   }
 
