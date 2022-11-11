@@ -4,7 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
  * @task :add validation to email, if email is not valid, if not valid email, dont allow to submit
  * @error_message :  "Email is invalid"  if email is wrong. (must be same message) 
  * 
- * 
+ *  state.fname != undefined
  */
 // const reducer = (state, action, event) => {
 //   switch (action.type) {
@@ -19,13 +19,14 @@ import React, { useState, useRef, useEffect } from 'react';
 
 function App() {
   const [state, setState] = useState({ fname: "", lname: "" });
+  const [status2, setStatus2] = useState(false)
 
 
   const [error, setError] = useState({ status: false, massage: "Email is invalid" });
   const fnameRef = useRef();
   const emailRef = useRef();
   const handlesubmit = () => {
-
+    setStatus2(true);
   }
 
   useEffect(() => {
@@ -67,7 +68,7 @@ function App() {
         <button id='submit' type="submit" disabled={error.status == true && state.lname.length > 0} onClick={handlesubmit} >Submit</button>
       </form>
       {
-        state.fname != undefined && (
+        status2 && (
           <div>
             <h1>{state.fname}</h1>
             <h2>{state.lname}</h2>
